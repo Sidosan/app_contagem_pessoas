@@ -1,18 +1,34 @@
+import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 
-mongo(List<String> arguments) async {
-  Db db = Db('mongodb://admin:admin@localhost:27017/test');
+void main() {
+  print(mongo2());
+}
 
-  DbCollection coll;
+//void mongo1() => print('test');
 
-  await db.open();
-  coll = db.collection("count");
-  print('conexao realizada com Banco $coll');
-  var val = await coll.findOne({'_id': 'total'});
+Future<int> mongo() async {
+  try {
+    Db db = Db('mongodb://admin:admin@localhost:27017/test');
+    DbCollection coll;
+    await db.open();
+    coll = db.collection("count");
+    //print('conexao realizada com Banco $coll');
+    Map<String, dynamic> val = await coll.findOne({'_id': 'total'});
+    int qty = await val['qty'].toInt();
+    //print(qty);
+    await db.close();
+    return qty;
+  } catch (err) {
+    print('Erro no banco de dados: $err');
+  }
+}
 
-  int qty = val['qty'].toInt();
-
-  await db.close();
-
-  return qty;
+void mongo2() {
+  try {
+    int teste = 0;
+    print("$teste");
+  } catch (err) {
+    print('Erro no banco de dados: $err');
+  }
 }
