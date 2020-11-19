@@ -27,6 +27,7 @@ dependencies:
   cupertino_icons: ^1.0.0
   mongo_dart: ^0.4.4
   get: ^3.16.2
+  sevr: any
 
 dev_dependencies:
   flutter_test:

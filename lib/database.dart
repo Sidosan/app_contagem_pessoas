@@ -7,7 +7,7 @@ void main() {
 
 //void mongo1() => print('test');
 
-Future<int> mongo() async {
+ mongo(List<String>) async {
   try {
     Db db = Db('mongodb://admin:admin@localhost:27017/test');
     DbCollection coll;
@@ -16,6 +16,7 @@ Future<int> mongo() async {
     //print('conexao realizada com Banco $coll');
     Map<String, dynamic> val = await coll.findOne({'_id': 'total'});
     int qty = await val['qty'].toInt();
+    
     //print(qty);
     await db.close();
     return qty;
@@ -24,11 +25,4 @@ Future<int> mongo() async {
   }
 }
 
-void mongo2() {
-  try {
-    int teste = 0;
-    print("$teste");
-  } catch (err) {
-    print('Erro no banco de dados: $err');
-  }
-}
+
