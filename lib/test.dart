@@ -1,12 +1,9 @@
-import 'package:get/get_state_manager/get_state_manager.dart';
+import 'dart:convert';
 import 'package:mongo_dart/mongo_dart.dart';
-import 'package:sevr/sevr.dart';
 
 void main() {
   print(mongo());
 }
-
-//void mongo1() => print('test');
 
 mongo() async {
   try {
@@ -14,16 +11,12 @@ mongo() async {
     DbCollection coll;
     await db.open();
     coll = db.collection("count");
-    final serv = Sevr();
-
-    serv.get('/', [
-      (ServRequest req, ServResponse res) async {
-        final contacts = await coll.find().toList();
-        return res.status(200);
-      }
-    ]);
-
+    //print('conexao realizada com Banco $coll');
+    Map<String, dynamic> val = await coll.findOne({'_id': 'total'});
+    int qty = await val['qty'].toInt();
     //print(qty);
+
+    print(qty);
     await db.close();
   } catch (err) {
     print('Erro no banco de dados: $err');

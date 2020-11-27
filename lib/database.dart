@@ -1,13 +1,10 @@
-import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 
 void main() {
-  print(mongo2());
+  print(mongo());
 }
 
-//void mongo1() => print('test');
-
- mongo(List<String>) async {
+mongo() async {
   try {
     Db db = Db('mongodb://admin:admin@localhost:27017/test');
     DbCollection coll;
@@ -16,13 +13,11 @@ void main() {
     //print('conexao realizada com Banco $coll');
     Map<String, dynamic> val = await coll.findOne({'_id': 'total'});
     int qty = await val['qty'].toInt();
-    
     //print(qty);
+
+    print(qty);
     await db.close();
-    return qty;
   } catch (err) {
     print('Erro no banco de dados: $err');
   }
 }
-
-
